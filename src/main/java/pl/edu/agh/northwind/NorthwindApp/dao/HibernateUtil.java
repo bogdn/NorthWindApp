@@ -13,7 +13,7 @@ public class HibernateUtil {
 
 	public static SessionFactory getSessionFactory() {
 		if(sessionFactory == null) {
-		Configuration configuration = new Configuration().configure("pl/edu/agh/northwind/NorthWindApp/resources/hibernate.cfg.xml");
+		Configuration configuration = new Configuration().configure("pl/edu/agh/northwind/NorthwindApp/resources/hibernate.cfg.xml");
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties());
 		sessionFactory = configuration.buildSessionFactory(builder
