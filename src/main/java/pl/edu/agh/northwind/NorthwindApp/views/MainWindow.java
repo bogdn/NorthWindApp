@@ -21,7 +21,7 @@ import pl.edu.agh.northwind.NorthwindApp.entities.Employee;
 public class MainWindow extends JFrame {
 	private JButton crudButton;
 	private JLabel infoLabel;
-	private static final String IMG_PATH = "src/main/java/pl/edu/agh/northwind/NorthWindApp/resources/logo_iet.png";
+	private static final String IMG_PATH = "src/main/java/pl/edu/agh/northwind/NorthwindApp/resources/logo_iet.png";
 	private JLabel aghIcon;
 	public MainWindow() {
 		super("NorthwindApp");
