@@ -5,20 +5,17 @@ import java.awt.event.ActionListener;
 
 import pl.edu.agh.northwind.NorthwindApp.views.MainWindow;
 
-public class CrudButtonListener implements ActionListener {
-	
+public class HomeButtonController implements ActionListener {
 	private MainWindow mainWindow;
-	public CrudButtonListener(MainWindow mainWindow) {
+	public HomeButtonController(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 		
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		mainWindow.setCrudButtonVisible(false);
-		mainWindow.setDatabaseTablesViewVisible(true);
-		System.out.println("klik");
-		
-		
+		System.out.println("Returned to home");
+		mainWindow.setDatabaseTablesViewVisible(false);
+		mainWindow.setCrudButtonVisible(true);
 		
 		
 	}
