@@ -11,7 +11,7 @@ public class EmployeesButtonListener implements ActionListener {
 		System.out.println("Employees Button clicked");
 		CrudView view = new CrudView("employees");
 		view.addListAllButtonListener(new ListAllButtonListener());
-		
+
 	}
 
 }

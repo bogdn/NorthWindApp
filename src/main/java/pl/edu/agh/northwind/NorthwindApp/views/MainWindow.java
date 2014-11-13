@@ -2,8 +2,6 @@ package pl.edu.agh.northwind.NorthwindApp.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import pl.edu.agh.northwind.NorthwindApp.controllers.MainController;
-import pl.edu.agh.northwind.NorthwindApp.dao.EmployeeDAO;
 import pl.edu.agh.northwind.NorthwindApp.entities.Employee;
 
 /**

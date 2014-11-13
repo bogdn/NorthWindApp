@@ -8,20 +8,37 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import pl.edu.agh.northwind.NorthwindApp.models.EmployeeTableModel;
+
 public class ListAllTable extends JFrame {
-	
+
 	private JTable table;
 	private JScrollPane scrollPane;
+
 	public ListAllTable(String tableName) {
-		super("Listing all members of " + tableName +" table");
+		super("Listing all members of " + tableName + " table");
 		setVisible(true);
-		setPreferredSize(new Dimension(400, 400));
+		setPreferredSize(new Dimension(900, 600));
+		//setExtendedState(JFrame.MAXIMIZED_BOTH); //fullScreen
+
+		table = new JTable();
 		
-//		scrollPane = new JScrollPane();
-//		scrollPane.add(table);
-//		add(scrollPane, BorderLayout.CENTER);
-		JLabel label = new JLabel("TU JTABLE Z PRACOWNIKAMI");
-		add(label, BorderLayout.CENTER);
+		// select table to list all records
+		switch (tableName) {
+		case "employees":
+			table.setModel(new EmployeeTableModel());
+			break;
+
+		default:
+			break;
+		}
+		 // adding table with scroolPane
+		scrollPane = new JScrollPane(table,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		add(scrollPane, BorderLayout.CENTER);
+
 		pack();
 	}
 
