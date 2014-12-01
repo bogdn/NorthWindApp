@@ -28,6 +28,7 @@ public class ListAllTable extends JFrame {
 		switch (tableName) {
 		case "employees":
 			table.setModel(new EmployeeTableModel());
+			break;
 		case "customers":
 			table.setModel(new CustomerTableModel());
 			break;
