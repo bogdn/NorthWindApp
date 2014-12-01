@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import pl.edu.agh.northwind.NorthwindApp.models.CustomerTableModel;
 import pl.edu.agh.northwind.NorthwindApp.models.EmployeeTableModel;
 
 public class ListAllTable extends JFrame {
@@ -27,6 +28,9 @@ public class ListAllTable extends JFrame {
 		switch (tableName) {
 		case "employees":
 			table.setModel(new EmployeeTableModel());
+			break;
+		case "customers":
+			table.setModel(new CustomerTableModel());
 			break;
 
 		default:

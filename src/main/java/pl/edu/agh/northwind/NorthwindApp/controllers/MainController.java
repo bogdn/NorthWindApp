@@ -11,6 +11,7 @@ public class MainController {
 		mainWindow.addCrudButtonListener(new CrudButtonListener(mainWindow));
 		mainWindow.addHomeButtonListener(new HomeButtonController(mainWindow));
 		mainWindow.addEmployeesButtonListener(new EmployeesButtonListener());
+		mainWindow.addCustomerButtonListener(new CustomerButtonListener());
 
 	}
 
