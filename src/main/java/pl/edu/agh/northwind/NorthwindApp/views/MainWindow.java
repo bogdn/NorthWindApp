@@ -20,10 +20,11 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import pl.edu.agh.northwind.NorthwindApp.controllers.MainController;
+import pl.edu.agh.northwind.NorthwindApp.entities.Customer;
 import pl.edu.agh.northwind.NorthwindApp.entities.Employee;
 
 /**
- * This windows starts when program firt run.
+ * This windows starts when program first run.
  *
  */
 public class MainWindow extends JFrame {
@@ -33,6 +34,7 @@ public class MainWindow extends JFrame {
 	private JLabel aghIcon;
 	private JPanel centerPanel;
 	private JButton employeesButton;
+	private JButton customerButton;
 	private JButton homeButton;
 	
 	public MainWindow() {
@@ -67,6 +69,10 @@ public class MainWindow extends JFrame {
 		centerPanel.add(employeesButton);
 		employeesButton.setVisible(false);
 		
+		customerButton = new JButton("customer");
+		centerPanel.add(customerButton);
+		customerButton.setVisible(false);
+		
 		}
 	
 	public void addCrudButtonListener(ActionListener al) {
@@ -81,6 +87,10 @@ public class MainWindow extends JFrame {
 		employeesButton.addActionListener(al);
 	}
 	
+	public void addCustomerButtonListener(ActionListener al) {
+		customerButton.addActionListener(al);
+	}
+	
 	public void setCrudButtonVisible(boolean visible) {
 		crudButton.setVisible(visible);
 	}
@@ -92,6 +102,7 @@ public class MainWindow extends JFrame {
 		infoLabel.setText((visible==true) ? "Select table for CRUD examples" : "Select operation below");
 		employeesButton.setVisible(visible);
 		homeButton.setVisible(visible);
+		customerButton.setVisible(visible);
 	}
 	
 	
@@ -110,11 +121,17 @@ public class MainWindow extends JFrame {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("northwind");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("from Employee");
+        Query query2 = entityManager.createQuery("from Customer");
         List<Employee> employees = new ArrayList<>();
+        List<Customer> customers = new ArrayList<>();
         employees = query.getResultList();
-        for (Employee employee : employees) {
+       for (Employee employee : employees) {
 			System.out.println(employee.getFirstName() + employee.getHomePhone());
 		}
+        customers = query2.getResultList();
+        for (Customer customer : customers) {
+        	System.out.println(customer.getContactName()+ customer.getRegion());
+        }
         
         
         
