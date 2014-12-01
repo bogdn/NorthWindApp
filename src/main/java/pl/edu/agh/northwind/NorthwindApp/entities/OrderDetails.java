@@ -36,7 +36,7 @@ public class OrderDetails implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue
 	@Column(name = "odID", unique = true, nullable = false)
 	public Integer getOdId() {
 		return this.odId;

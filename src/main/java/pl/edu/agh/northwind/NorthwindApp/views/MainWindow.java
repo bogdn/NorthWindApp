@@ -107,14 +107,14 @@ public class MainWindow extends JFrame {
 				
 			}
 		});
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("northwind");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Query query = entityManager.createQuery("from Employee");
-        List<Employee> employees = new ArrayList<>();
-        employees = query.getResultList();
-        for (Employee employee : employees) {
-			System.out.println(employee.getFirstName() + employee.getHomePhone());
-		}
+//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("northwind");
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        Query query = entityManager.createQuery("from Employee");
+//        List<Employee> employees = new ArrayList<>();
+//        employees = query.getResultList();
+//        for (Employee employee : employees) {
+//			System.out.println(employee.getFirstName() + employee.getHomePhone());
+//		}
         
         
         
