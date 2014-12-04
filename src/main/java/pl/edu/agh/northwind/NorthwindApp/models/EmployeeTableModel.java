@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.swing.table.AbstractTableModel;
 
+import pl.edu.agh.northwind.NorthwindApp.dao.EmployeeDAO;
 import pl.edu.agh.northwind.NorthwindApp.entities.Employee;
 
 public class EmployeeTableModel extends AbstractTableModel implements
@@ -29,31 +30,57 @@ public class EmployeeTableModel extends AbstractTableModel implements
 
 	public Object[][] getRows() {
 		
-		List<Employee> employees = new ArrayList<>();
+		List<Employee> employees = EmployeeDAO.findAll();
 		
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("northwind");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        
-        entityManager.getTransaction().begin();
-        
-        Query query = entityManager.createQuery("from Employee");
-        employees = query.getResultList();
-
-        entityManager.getTransaction().commit();
-		
-        Object[][] rows = new Object[getColumnCount()][employees.size()+11];
-		
-        for (Object[] objects : rows) {
-        	for (Object object : objects) {
-        		object = "ss";
-				
+        Object[][] rows = new Object[employees.size()][getColumnCount()];
+		rows[2][3] = new String("test"); 
+		for(int i=0; i< employees.size(); i++)
+			for(int j=0; j<getColumnCount(); j++) {
+				rows[i][j] = getMetadataFromEmployee(employees.get(i), j);
 			}
-			
-		}
-        System.out.println(rows[2][2]);
-//        entityManagerFactory.close();
-//        entityManager.close();
 		return rows;
+	}
+	public Object getMetadataFromEmployee(Employee employee, int index) {
+		
+		switch (index) {
+		case 0:
+			return employee.getEmployeeId();
+		case 1:
+			return employee.getLastName();
+		case 2:
+			return employee.getFirstName();
+		case 3:
+			return employee.getTitle();
+		case 4:
+			return employee.getTitleOfCourtesy();
+		case 5:
+			return employee.getBirthDate();
+		case 6:
+			return employee.getHireDate();
+		case 7:
+			return employee.getAddress();
+		case 8:
+			return employee.getCity();
+		case 9:
+			return employee.getRegion();
+		case 10:
+			return employee.getPostalCode();
+		case 11:
+			return employee.getCountry();
+		case 12:
+			return employee.getHomePhone();
+		case 13:
+			return employee.getExtension();
+		case 14:
+			return employee.getPhoto();
+		case 15:
+			return employee.getNotes();
+		case 16:
+			return employee.getReportsTo();
+			
+		default:
+			return null;
+		}
 	}
 
 	// Implementing AbstractTableModel methods

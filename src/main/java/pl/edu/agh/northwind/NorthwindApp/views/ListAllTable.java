@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -20,7 +19,7 @@ public class ListAllTable extends JFrame {
 		super("Listing all members of " + tableName + " table");
 		setVisible(true);
 		setPreferredSize(new Dimension(900, 600));
-		//setExtendedState(JFrame.MAXIMIZED_BOTH); //fullScreen
+		//setExtendedState(JFrame.MAXIMIZED_BOTH); //fullScreen ON /OFF
 
 		table = new JTable();
 		
@@ -42,7 +41,8 @@ public class ListAllTable extends JFrame {
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		add(scrollPane, BorderLayout.CENTER);
-
+		getContentPane().validate();
+		repaint();
 		pack();
 	}
 
