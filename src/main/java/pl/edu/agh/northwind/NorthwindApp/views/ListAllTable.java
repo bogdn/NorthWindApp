@@ -2,6 +2,8 @@ package pl.edu.agh.northwind.NorthwindApp.views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -41,8 +43,7 @@ public class ListAllTable extends JFrame {
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		add(scrollPane, BorderLayout.CENTER);
-		getContentPane().validate();
-		repaint();
+
 		pack();
 	}
 

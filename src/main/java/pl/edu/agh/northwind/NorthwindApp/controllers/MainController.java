@@ -12,7 +12,7 @@ public class MainController {
 		mainWindow.addHomeButtonListener(new HomeButtonController(mainWindow));
 		mainWindow.addEmployeesButtonListener(new EmployeesButtonListener());
 		mainWindow.addCustomerButtonListener(new CustomerButtonListener());
-
+		mainWindow.addProductsButtonListener(new ProductButtonListener());
 	}
 
 }

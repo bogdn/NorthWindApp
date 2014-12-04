@@ -2,10 +2,16 @@ package pl.edu.agh.northwind.NorthwindApp.entities;
 
 // Generated 2014-10-13 21:10:57 by Hibernate Tools 4.0.0
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.OneToMany;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,6 +26,9 @@ public class Category implements java.io.Serializable {
 	private String categoryName;
 	private String description;
 	private String picture;
+	
+	@OneToMany(mappedBy = "category")
+	private List<Product> products = new ArrayList<>();
 
 	public Category() {
 	}
