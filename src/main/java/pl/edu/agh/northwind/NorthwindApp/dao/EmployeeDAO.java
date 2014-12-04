@@ -16,7 +16,7 @@ public class EmployeeDAO {
 	private static final Logger logger = Logger.getLogger(EmployeeDAO.class
 			.getName());
 
-	public void createEmployee(Employee employee) {
+	public static void createEmployee(Employee employee) {
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory("northwind");
 		EntityManager entityManager = entityManagerFactory
@@ -27,13 +27,11 @@ public class EmployeeDAO {
 
 		entityManager.getTransaction().commit();
 
-		entityManagerFactory.close();
-		entityManager.close();
 		logger.info("Just added new employee");
 
 	}
 
-	public List<Employee> findAll() {
+	public static List<Employee> findAll() {
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory("northwind");
 		EntityManager entityManager = entityManagerFactory
@@ -44,9 +42,6 @@ public class EmployeeDAO {
 		Query query = entityManager.createQuery("from Employee");
 		employees = query.getResultList();
 		entityManager.getTransaction().commit();
-
-		entityManagerFactory.close();
-		entityManager.close();
 
 		logger.info("Received all employees");
 

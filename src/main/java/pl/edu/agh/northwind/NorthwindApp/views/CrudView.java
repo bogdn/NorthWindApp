@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 public class CrudView extends JFrame {
 
 	private JButton listAllButton;
+	private JButton addRecordButton;
 
 	public CrudView(String tableName) {
 		super("Operations for " + tableName + " table");
@@ -21,10 +22,17 @@ public class CrudView extends JFrame {
 		listAllButton.setBounds(120, 20, 170, 50);
 		add(listAllButton);
 
+		addRecordButton = new JButton("Add to " + tableName);
+		addRecordButton.setBounds(120, 90, 170, 50);
+		add(addRecordButton);
 		pack();
 	}
 
 	public void addListAllButtonListener(ActionListener al) {
 		listAllButton.addActionListener(al);
+	}
+
+	public void addAddRecordButtonListener(ActionListener al) {
+		addRecordButton.addActionListener(al);
 	}
 }
