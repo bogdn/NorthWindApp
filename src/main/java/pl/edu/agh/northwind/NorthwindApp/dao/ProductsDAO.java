@@ -18,15 +18,20 @@ public class ProductsDAO {
 			.getName());
 
 	public List<Product> findAll() {
-		EntityManagerFactory entityManagerFactory = Persistence
-				.createEntityManagerFactory("northwind");
-		EntityManager entityManager = entityManagerFactory
-				.createEntityManager();
+		EntityManager entityManager = HibernateUtil.getEntityManager();
 		Query query = entityManager.createQuery("from Product");
 		List<Product> products = new ArrayList<>();
 		;
-		products = query.getResultList();;
+		products = query.getResultList();
 
 		return products;
+	}
+	
+	public void deleteProduct(Product product)
+	{
+		EntityManager entityManager = HibernateUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.remove(product);
+		entityManager.getTransaction().commit();
 	}
 }

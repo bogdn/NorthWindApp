@@ -76,6 +76,7 @@ public class ProductsTable extends JFrame {
 		buttonEditorDelete.addTableButtonListener(new TableButtonListener() {
 		  @Override
 		  public void tableButtonClicked(int row, int col) {
+			  productsDAO.deleteProduct(objects.get(row));
 			  objects.remove(row);
 			  model.fireTableDataChanged();
 		  }     
