@@ -2,6 +2,8 @@ package pl.edu.agh.northwind.NorthwindApp.views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,7 +12,6 @@ import javax.swing.JTable;
 
 import pl.edu.agh.northwind.NorthwindApp.models.CustomerTableModel;
 import pl.edu.agh.northwind.NorthwindApp.models.EmployeeTableModel;
-import pl.edu.agh.northwind.NorthwindApp.models.ProductsTableModel;
 
 public class ListAllTable extends JFrame {
 
@@ -33,9 +34,6 @@ public class ListAllTable extends JFrame {
 		case "customers":
 			table.setModel(new CustomerTableModel());
 			break;
-		case "products":
-			table.setModel(new ProductsTableModel());
-			break;
 
 		default:
 			break;
@@ -46,6 +44,13 @@ public class ListAllTable extends JFrame {
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		add(scrollPane, BorderLayout.CENTER);
+		
+		PopupMenu popupMenu = new PopupMenu();
+		MenuItem menuItem = new MenuItem();
+		menuItem.setLabel("Delete");
+		popupMenu.add(menuItem);
+		
+		table.add(popupMenu);
 
 		pack();
 	}

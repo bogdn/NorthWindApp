@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import pl.edu.agh.northwind.NorthwindApp.views.ListAllTable;
+import pl.edu.agh.northwind.NorthwindApp.views.ProductsTable;
 
 public class ListAllButtonListener implements ActionListener {
 
@@ -21,7 +22,7 @@ public class ListAllButtonListener implements ActionListener {
 		}
 		else if(source.getText().contains("products"))
 		{
-			new ListAllTable("products");
+			new ProductsTable();
 		}
 
 	}
