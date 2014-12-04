@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import pl.edu.agh.northwind.NorthwindApp.controllers.MainController;
+import pl.edu.agh.northwind.NorthwindApp.controllers.ProductButtonListener;
 import pl.edu.agh.northwind.NorthwindApp.entities.Customer;
 import pl.edu.agh.northwind.NorthwindApp.entities.Employee;
 
@@ -35,6 +36,7 @@ public class MainWindow extends JFrame {
 	private JPanel centerPanel;
 	private JButton employeesButton;
 	private JButton customerButton;
+	private JButton productsButton;
 	private JButton homeButton;
 	
 	public MainWindow() {
@@ -73,6 +75,10 @@ public class MainWindow extends JFrame {
 		centerPanel.add(customerButton);
 		customerButton.setVisible(false);
 		
+		productsButton = new JButton("Products");
+		centerPanel.add(productsButton);
+		productsButton.setVisible(false);
+		
 		}
 	
 	public void addCrudButtonListener(ActionListener al) {
@@ -91,6 +97,10 @@ public class MainWindow extends JFrame {
 		customerButton.addActionListener(al);
 	}
 	
+	public void addProductsButtonListener(ActionListener al) {
+		productsButton.addActionListener(al);
+	}
+	
 	public void setCrudButtonVisible(boolean visible) {
 		crudButton.setVisible(visible);
 	}
@@ -103,6 +113,7 @@ public class MainWindow extends JFrame {
 		employeesButton.setVisible(visible);
 		homeButton.setVisible(visible);
 		customerButton.setVisible(visible);
+		productsButton.setVisible(visible);
 	}
 	
 	
