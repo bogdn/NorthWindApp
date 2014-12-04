@@ -1,6 +1,7 @@
 package pl.edu.agh.northwind.NorthwindApp.models;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.event.TableModelListener;
@@ -14,18 +15,22 @@ import pl.edu.agh.northwind.NorthwindApp.entities.Product;
 
 public class ProductsTableModel extends AbstractTableModel {
 	ProductsDAO productsDAO = new ProductsDAO();
-	private Field[] columnNames;
+	private List<String> columnNames;
 	private List<Product> objects;
 
 	public ProductsTableModel() {
-		columnNames = getColumnNamesFromDatabase();
+		columnNames = getColumns();
 		objects = getRows();
 		System.out.println(objects);
 	}
 
-	// Implementing ListAllInterface methods
-	public Field[] getColumnNamesFromDatabase() {
-		return Customer.class.getDeclaredFields();
+	public List<String> getColumns() {
+		ArrayList<String> columns = new ArrayList<>();
+
+		columns.add("Name");
+		columns.add("Category");
+
+		return columns;
 	}
 
 	public List<Product> getRows() {
@@ -38,11 +43,22 @@ public class ProductsTableModel extends AbstractTableModel {
 	}
 
 	public int getColumnCount() {
-		return columnNames.length;
+		return columnNames.size();
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return objects.get(rowIndex);
+		return getValue(objects.get(rowIndex), columnNames.get(columnIndex));
+	}
+
+	private String getValue(Product product, String column) {
+		switch (column) {
+		case "Name":
+			return product.getProductName();
+		case "Category":
+			return product.getCategory().getCategoryName();
+		default:
+			return "";
+		}
 	}
 
 	public Class<?> getColumnClass(int columnIndex) {
@@ -50,7 +66,7 @@ public class ProductsTableModel extends AbstractTableModel {
 	}
 
 	public String getColumnName(int column) {
-		return columnNames[column].getName();
+		return columnNames.get(column);
 	}
 
 }
