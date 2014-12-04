@@ -10,6 +10,7 @@ import javax.swing.JTable;
 
 import pl.edu.agh.northwind.NorthwindApp.models.CustomerTableModel;
 import pl.edu.agh.northwind.NorthwindApp.models.EmployeeTableModel;
+import pl.edu.agh.northwind.NorthwindApp.models.ProductsTableModel;
 
 public class ListAllTable extends JFrame {
 
@@ -31,6 +32,9 @@ public class ListAllTable extends JFrame {
 			break;
 		case "customers":
 			table.setModel(new CustomerTableModel());
+			break;
+		case "products":
+			table.setModel(new ProductsTableModel());
 			break;
 
 		default:
