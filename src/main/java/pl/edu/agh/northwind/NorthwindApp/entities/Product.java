@@ -23,7 +23,7 @@ public class Product implements java.io.Serializable {
 
 	private Integer productId;
 	private String productName;
-	private Integer supplierId;
+	private Supplier supplier;
 	private Category category;
 	private String quantityPerUnit;
 	private Float unitPrice;
@@ -35,11 +35,11 @@ public class Product implements java.io.Serializable {
 	public Product() {
 	}
 
-	public Product(String productName, Integer supplierId, Category category,
+	public Product(String productName, Supplier supplier, Category category,
 			String quantityPerUnit, Float unitPrice, Short unitsInStock,
 			Short unitsOnOrder, Short reorderLevel, Boolean discontinued) {
 		this.productName = productName;
-		this.supplierId = supplierId;
+		this.supplier = supplier;
 		this.category = category;
 		this.quantityPerUnit = quantityPerUnit;
 		this.unitPrice = unitPrice;
@@ -69,13 +69,14 @@ public class Product implements java.io.Serializable {
 		this.productName = productName;
 	}
 
-	@Column(name = "SupplierID")
-	public Integer getSupplierId() {
-		return this.supplierId;
+	@ManyToOne
+	@JoinColumn(name = "SupplierID")
+	public Supplier getSupplier() {
+		return this.supplier;
 	}
 
-	public void setSupplierId(Integer supplierId) {
-		this.supplierId = supplierId;
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 	@ManyToOne

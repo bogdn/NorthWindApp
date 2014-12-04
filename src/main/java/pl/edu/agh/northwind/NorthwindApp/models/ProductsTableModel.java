@@ -29,6 +29,7 @@ public class ProductsTableModel extends AbstractTableModel {
 
 		columns.add("Name");
 		columns.add("Category");
+		columns.add("Supplier");
 
 		return columns;
 	}
@@ -51,14 +52,21 @@ public class ProductsTableModel extends AbstractTableModel {
 	}
 
 	private String getValue(Product product, String column) {
-		switch (column) {
-		case "Name":
-			return product.getProductName();
-		case "Category":
-			return product.getCategory().getCategoryName();
-		default:
+		try {
+			switch (column) {
+			case "Name":
+				return product.getProductName();
+			case "Category":
+				return product.getCategory().getCategoryName();
+			case "Supplier":
+				return product.getSupplier().getCompanyName();
+			default:
+				return "";
+			}
+		} catch (NullPointerException e) {
 			return "";
 		}
+
 	}
 
 	public Class<?> getColumnClass(int columnIndex) {

@@ -11,7 +11,9 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hbm2ddl.auto">update</property>
         <mapping class="pl.edu.agh.northwind.NorthwindApp.entities.Employee"/>
-         
         <mapping class="pl.edu.agh.northwind.NorthwindApp.entities.Customer"/>
+        <mapping class="pl.edu.agh.northwind.NorthwindApp.entities.Product"/>
+        <mapping class="pl.edu.agh.northwind.NorthwindApp.entities.Category"/>
+        <mapping class="pl.edu.agh.northwind.NorthwindApp.entities.Supplier"/>
     </session-factory>
 </hibernate-configuration>

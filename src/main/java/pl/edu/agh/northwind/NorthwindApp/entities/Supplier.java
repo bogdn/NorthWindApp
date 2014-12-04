@@ -2,10 +2,16 @@ package pl.edu.agh.northwind.NorthwindApp.entities;
 
 // Generated 2014-10-13 21:10:57 by Hibernate Tools 4.0.0
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.OneToMany;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "suppliers")
-public class Suppliers implements java.io.Serializable {
+public class Supplier implements java.io.Serializable {
 
 	private Integer supplierId;
 	private String companyName;
@@ -28,11 +34,14 @@ public class Suppliers implements java.io.Serializable {
 	private String phone;
 	private String fax;
 	private String homePage;
+	
+	@OneToMany(mappedBy = "supplier")
+	private List<Product> products = new ArrayList<>();
 
-	public Suppliers() {
+	public Supplier() {
 	}
 
-	public Suppliers(String companyName, String contactName,
+	public Supplier(String companyName, String contactName,
 			String contactTitle, String address, String city, String region,
 			String postalCode, String country, String phone, String fax,
 			String homePage) {
