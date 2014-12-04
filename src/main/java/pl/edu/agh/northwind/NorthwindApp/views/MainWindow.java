@@ -75,7 +75,7 @@ public class MainWindow extends JFrame {
 		centerPanel.add(customerButton);
 		customerButton.setVisible(false);
 		
-		productsButton = new JButton("Products");
+		productsButton = new JButton("products");
 		centerPanel.add(productsButton);
 		productsButton.setVisible(false);
 		

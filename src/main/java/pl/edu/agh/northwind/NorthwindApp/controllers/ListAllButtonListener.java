@@ -16,8 +16,12 @@ public class ListAllButtonListener implements ActionListener {
 		if (source.getText().contains("employees")) {
 			new ListAllTable("employees");
 		}
-		if (source.getText().contains("customers")) {
+		else if (source.getText().contains("customers")) {
 			new ListAllTable("customers");
+		}
+		else if(source.getText().contains("products"))
+		{
+			new ListAllTable("products");
 		}
 
 	}
