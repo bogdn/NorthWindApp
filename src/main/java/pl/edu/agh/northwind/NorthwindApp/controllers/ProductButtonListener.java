@@ -14,6 +14,7 @@ public class ProductButtonListener implements ActionListener{
 		System.out.println("test");
 		CrudView view = new CrudView("products");
 		view.addListAllButtonListener(new ListAllButtonListener());
+		view.addAddRecordButtonListener(new AddRecordButtonListener());
 	}
 
 }

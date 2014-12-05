@@ -45,6 +45,9 @@ import pl.edu.agh.northwind.NorthwindApp.models.EmployeeTableModel;
 
 public class ProductsTable extends JFrame {
 
+	private static final int EDIT_COLUMN_INDEX = 9;
+	private static final int DELETE_COLUMN_INDEX = 10;
+	
 	private JTable table;
 	private JScrollPane scrollPane;
 	private ProductsTableModel model;
@@ -90,12 +93,12 @@ public class ProductsTable extends JFrame {
 		  }     
 		});
 		
-		TableColumn columnEdit = table.getColumnModel().getColumn(3);
+		TableColumn columnEdit = table.getColumnModel().getColumn(EDIT_COLUMN_INDEX);
 		columnEdit.setCellRenderer(buttonEditorEdit);
 		columnEdit.setCellEditor(buttonEditorEdit);
 		columnEdit.setPreferredWidth(100);
 		
-		TableColumn columnDelete = table.getColumnModel().getColumn(4);
+		TableColumn columnDelete = table.getColumnModel().getColumn(DELETE_COLUMN_INDEX);
 		columnDelete.setCellRenderer(buttonEditorDelete);
 		columnDelete.setCellEditor(buttonEditorDelete);
 		columnDelete.setPreferredWidth(100);
@@ -103,6 +106,7 @@ public class ProductsTable extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(150);
 		table.getColumnModel().getColumn(1).setPreferredWidth(150);
 		table.getColumnModel().getColumn(2).setPreferredWidth(150);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
 
 		pack();
 		
@@ -129,6 +133,12 @@ public class ProductsTable extends JFrame {
 		columns.add("Name");
 		columns.add("Category");
 		columns.add("Supplier");
+		columns.add("Quantity per unit");
+		columns.add("Unit price");
+		columns.add("Unit in stock");
+		columns.add("Units on order");
+		columns.add("Reordel level");
+		columns.add("Discontinued");
 		columns.add("Edit");
 		columns.add("Delete");
 
@@ -158,7 +168,7 @@ public class ProductsTable extends JFrame {
 			return getValue(objects.get(rowIndex), columnNames.get(columnIndex));
 		}
 
-		private String getValue(Product product, String column) {
+		private Object getValue(Product product, String column) {
 			try {
 				switch (column) {
 				case "Name":
@@ -167,15 +177,24 @@ public class ProductsTable extends JFrame {
 					return product.getCategory().getCategoryName();
 				case "Supplier":
 					return product.getSupplier().getCompanyName();
-				case "Delete":
-					return "Delete";
+				case "Quantity per unit":
+					return product.getQuantityPerUnit();
+				case "Unit price":
+					return product.getUnitPrice();
+				case "Unit in stock":
+					return product.getUnitsInStock();
+				case "Units on order":
+					return product.getUnitsOnOrder();
+				case "Reordel level":
+					return product.getReorderLevel();
+				case "Discontinued":
+					return product.getDiscontinued();
 				default:
 					return "";
 				}
 			} catch (NullPointerException e) {
 				return "";
 			}
-
 		}
 
 		public Class<?> getColumnClass(int columnIndex) {
@@ -188,11 +207,9 @@ public class ProductsTable extends JFrame {
 
 		@Override
 		public boolean isCellEditable(int rowIndex, int columnIndex) {
-			return columnIndex == 3 || columnIndex == 4;
+			return columnIndex == EDIT_COLUMN_INDEX || columnIndex == DELETE_COLUMN_INDEX;
 		}
 		
-		
-
 	}
 
 	public class TableButton extends JButton implements TableCellRenderer, TableCellEditor {
