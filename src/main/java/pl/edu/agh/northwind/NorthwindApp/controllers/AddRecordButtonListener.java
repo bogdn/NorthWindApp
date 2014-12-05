@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import pl.edu.agh.northwind.NorthwindApp.views.EmployeeFormView;
 import pl.edu.agh.northwind.NorthwindApp.views.ListAllTable;
+import pl.edu.agh.northwind.NorthwindApp.views.ProductFormView;
 
 public class AddRecordButtonListener implements ActionListener {
 
@@ -17,7 +18,14 @@ public class AddRecordButtonListener implements ActionListener {
 		if (source.getText().contains("employees")) {
 			new EmployeeFormView("add", null);
 			System.out.println("adddddd");
-		} 
+
+		}
+		else if (source.getText().contains("products")) {
+			new ProductFormView("add");
+			System.out.println("teststest");
+		}
+
+
 	}
 
 }
