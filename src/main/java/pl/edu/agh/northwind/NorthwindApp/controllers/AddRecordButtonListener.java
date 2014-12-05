@@ -16,8 +16,9 @@ public class AddRecordButtonListener implements ActionListener {
 		JButton source = (JButton) arg0.getSource();
 		System.out.println("test");
 		if (source.getText().contains("employees")) {
-			new EmployeeFormView("add");
+			new EmployeeFormView("add", null);
 			System.out.println("adddddd");
+
 		}
 		else if (source.getText().contains("products")) {
 			new ProductFormView("add");

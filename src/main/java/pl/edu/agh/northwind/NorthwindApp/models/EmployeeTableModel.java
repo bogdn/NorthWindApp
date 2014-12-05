@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import pl.edu.agh.northwind.NorthwindApp.dao.EmployeeDAO;
 import pl.edu.agh.northwind.NorthwindApp.entities.Employee;

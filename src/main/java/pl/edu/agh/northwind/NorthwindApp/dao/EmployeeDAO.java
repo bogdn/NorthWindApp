@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import pl.edu.agh.northwind.NorthwindApp.entities.Employee;
 
 public class EmployeeDAO {
+	private static EntityManager entityManager = HibernateUtil.getEntityManager();
 
 	private static final Logger logger = Logger.getLogger(EmployeeDAO.class
 			.getName());
@@ -29,6 +30,21 @@ public class EmployeeDAO {
 
 		logger.info("Just added new employee");
 
+	}
+	public static Employee findEmployee(int id) {
+		return entityManager.find(Employee.class, id);
+		
+	}
+	
+	public static void removeEmployee(int id) {
+		 entityManager.getTransaction().begin();
+		Employee emp = findEmployee(id);
+		System.out.println("Deleting        : " + emp.getFirstName());
+	    if (emp != null) 
+	      entityManager.remove(emp);
+	    entityManager.getTransaction().commit();
+	    
+		
 	}
 
 	public static List<Employee> findAll() {

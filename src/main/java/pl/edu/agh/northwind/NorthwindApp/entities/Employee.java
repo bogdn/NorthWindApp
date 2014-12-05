@@ -83,7 +83,7 @@ public class Employee implements java.io.Serializable {
 		this.lastName = lastName;
 	}
 
-	@Column(name = "FirstName", length = 10)
+	@Column(name = "FirstName", length = 20)
 	public String getFirstName() {
 		return this.firstName;
 	}
