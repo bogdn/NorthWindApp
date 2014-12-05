@@ -89,7 +89,7 @@ public class ProductsTable extends JFrame {
 		buttonEditorEdit.addTableButtonListener(new TableButtonListener() {
 		  @Override
 		  public void tableButtonClicked(int row, int col) {
-			  System.out.println("test123");
+			  new ProductFormView("edit", objects.get(row));
 		  }     
 		});
 		

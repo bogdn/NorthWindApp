@@ -34,4 +34,16 @@ public class ProductsDAO {
 		entityManager.remove(product);
 		entityManager.getTransaction().commit();
 	}
+
+	public void addProduct(Product product) {
+//		EntityManager entityManager = HibernateUtil.getEntityManager();
+//		entityManager.getTransaction().begin();
+//		entityManager.
+//		entityManager.getTransaction().commit();
+	}
+
+	public void editProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -17,9 +18,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.ListDataListener;
 
+import pl.edu.agh.northwind.NorthwindApp.dao.CategoryDAO;
 import pl.edu.agh.northwind.NorthwindApp.dao.EmployeeDAO;
+import pl.edu.agh.northwind.NorthwindApp.dao.ProductsDAO;
+import pl.edu.agh.northwind.NorthwindApp.dao.SupplierDAO;
 import pl.edu.agh.northwind.NorthwindApp.entities.Category;
 import pl.edu.agh.northwind.NorthwindApp.entities.Employee;
+import pl.edu.agh.northwind.NorthwindApp.entities.Product;
+import pl.edu.agh.northwind.NorthwindApp.entities.Supplier;
 
 public class ProductFormView extends JFrame {
 	private String operationType;
@@ -28,10 +34,11 @@ public class ProductFormView extends JFrame {
 	
 	private JLabel suplierLabel;
 	private JComboBox suplierComboBox;
+	private DefaultComboBoxModel<String> suplierComboBoxModel = new DefaultComboBoxModel<>();
 	
 	private JLabel categoryLabel;
 	private JComboBox categoryComboBox;
-	private CategoryComboBoxModel categoryComboBoxModel;
+	private DefaultComboBoxModel<String> categoryComboBoxModel = new DefaultComboBoxModel<>();
 	
 	private JLabel quantityPerUnitLabel;
 	private JTextField quantityPerUnitTextField;
@@ -53,8 +60,20 @@ public class ProductFormView extends JFrame {
 	
 	private JButton addButton;
 	
+	private CategoryDAO categoryDAO = new CategoryDAO();
+	private SupplierDAO supplierDAO = new SupplierDAO();
+	private ProductsDAO productsDAO = new ProductsDAO();
+	
 	private List<Category> categories;
-	public ProductFormView(String operationType) {
+	private List<Supplier> suppliers;
+	private Product product;
+	
+	public ProductFormView(String operationType)
+	{
+		this(operationType, null);
+	}
+	
+	public ProductFormView(String operationType, Product product) {
 		super("Adding record to product table");
 		this.operationType = operationType;
 		setPreferredSize(new Dimension(400, 700));
@@ -72,7 +91,7 @@ public class ProductFormView extends JFrame {
 		JPanel suplierPanel = new JPanel();
 		suplierPanel.setLayout(new GridLayout(1, 2));
 		suplierLabel = new JLabel("Suplier:");
-		suplierComboBox = new JComboBox<>(new SuplierComboBoxModel());
+		suplierComboBox = new JComboBox<>(suplierComboBoxModel);
 		suplierPanel.add(suplierLabel);
 		suplierPanel.add(suplierComboBox);
 		add(suplierPanel);
@@ -80,7 +99,6 @@ public class ProductFormView extends JFrame {
 		JPanel categoryPanel = new JPanel();
 		categoryPanel.setLayout(new GridLayout(1, 2));
 		categoryLabel = new JLabel("Category:");
-		categoryComboBoxModel = new CategoryComboBoxModel();
 		categoryComboBox = new JComboBox<>(categoryComboBoxModel);
 		categoryPanel.add(categoryLabel);
 		categoryPanel.add(categoryComboBox);
@@ -133,95 +151,98 @@ public class ProductFormView extends JFrame {
 		discontinuedPanel.add(discontinuedLabel);
 		discontinuedPanel.add(discontinuedCheckBox);
 		add(discontinuedPanel);
+		
+		addButton = new JButton(operationType.toUpperCase());
+		addButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				performAction();
+			}
+		});
+		add(addButton);
 				
 		pack();
+				
+		this.product = product;
 		
 		loadData();
 	}
 	
-	private void loadData() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private class CategoryComboBoxModel implements ComboBoxModel<String>
-	{
-
-		@Override
-		public int getSize() {
-			// TODO Auto-generated method stub
-			return categories != null ? categories.size() : 0;
+	private void setSuplier(Supplier supplier) {
+		if(supplier == null) return;
+		int idx = 0;
+		for (Supplier supplier2 : suppliers) {
+			if(supplier.getSupplierId() == supplier2.getSupplierId())
+			{
+				suplierComboBox.setSelectedIndex(idx);
+				break;
+			}
+			idx++;
 		}
-
-		@Override
-		public String getElementAt(int index) {
-			return categories.get(index).getCategoryName();
-		}
-
-		@Override
-		public void addListDataListener(ListDataListener l) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void removeListDataListener(ListDataListener l) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void setSelectedItem(Object anItem) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Object getSelectedItem() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
 	}
 	
-	private class SuplierComboBoxModel implements ComboBoxModel<Category>
-	{
-
-		@Override
-		public int getSize() {
-			// TODO Auto-generated method stub
-			return 0;
+	private void setCategory(Category category) {
+		if(category == null) return;
+		int idx = 0;
+		for (Category category2 : categories) {
+			if(category.getCategoryId() == category2.getCategoryId())
+			{
+				categoryComboBox.setSelectedIndex(idx);
+				break;
+			}
+			idx++;
 		}
+	}
 
-		@Override
-		public Category getElementAt(int index) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void addListDataListener(ListDataListener l) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void removeListDataListener(ListDataListener l) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void setSelectedItem(Object anItem) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Object getSelectedItem() {
-			// TODO Auto-generated method stub
-			return null;
+	private void loadData() {
+		categories = categoryDAO.findAll();
+		for (Category category : categories) {
+			categoryComboBoxModel.addElement(category.getCategoryName());
 		}
 		
+		suppliers = supplierDAO.findAll();
+		for (Supplier supplier : suppliers) {
+			suplierComboBoxModel.addElement(supplier.getCompanyName());
+		}
+		
+		if(product != null)
+		{
+			nameTextField.setText(product.getProductName());
+			setSuplier(product.getSupplier());
+			setCategory(product.getCategory());
+			quantityPerUnitTextField.setText(product.getQuantityPerUnit());
+			unitPriceTextField.setText(String.valueOf(product.getUnitPrice()));
+			unitsInStockTextField.setText(String.valueOf(product.getUnitsInStock()));
+			unitsOnOrderTextField.setText(String.valueOf(product.getUnitsOnOrder()));
+			reordelLevelTextField.setText(String.valueOf(product.getReorderLevel()));
+			discontinuedCheckBox.setSelected(product.getDiscontinued());
+		}
+	}
+	
+	private void performAction() {
+		if(product == null)
+		{
+			product = new Product();
+		}
+		
+		product.setProductName(nameTextField.getText());
+		product.setSupplier(suppliers.get(suplierComboBox.getSelectedIndex()));
+		product.setCategory(categories.get(categoryComboBox.getSelectedIndex()));
+		product.setQuantityPerUnit(quantityPerUnitTextField.getText());
+		product.setUnitPrice(Float.parseFloat(unitPriceTextField.getText()));
+		product.setUnitsInStock(Short.parseShort(unitsInStockTextField.getText()));
+		product.setUnitsOnOrder(Short.parseShort(unitsOnOrderTextField.getText()));
+		product.setReorderLevel(Short.parseShort(reordelLevelTextField.getText()));
+		product.setDiscontinued(discontinuedCheckBox.isSelected());
+		
+		if(operationType.equalsIgnoreCase("add"))
+		{
+			productsDAO.addProduct(product);
+		}
+		else if (operationType.equalsIgnoreCase("edit")) {
+			productsDAO.editProduct(product);
+		}
 	}
 }
