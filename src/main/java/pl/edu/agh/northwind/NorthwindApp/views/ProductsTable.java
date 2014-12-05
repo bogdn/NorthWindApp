@@ -43,7 +43,7 @@ import pl.edu.agh.northwind.NorthwindApp.entities.Product;
 import pl.edu.agh.northwind.NorthwindApp.models.CustomerTableModel;
 import pl.edu.agh.northwind.NorthwindApp.models.EmployeeTableModel;
 
-public class ProductsTable extends JFrame {
+public class ProductsTable extends JFrame implements PerformActionHandler{
 
 	private static final int EDIT_COLUMN_INDEX = 9;
 	private static final int DELETE_COLUMN_INDEX = 10;
@@ -89,7 +89,7 @@ public class ProductsTable extends JFrame {
 		buttonEditorEdit.addTableButtonListener(new TableButtonListener() {
 		  @Override
 		  public void tableButtonClicked(int row, int col) {
-			  new ProductFormView("edit", objects.get(row));
+			  new ProductFormView("edit", objects.get(row)).setHandler(ProductsTable.this);;
 		  }     
 		});
 		
@@ -287,6 +287,12 @@ public class ProductsTable extends JFrame {
 	public interface TableButtonListener extends EventListener {
 		  public void tableButtonClicked( int row, int col );
 		}
+
+	@Override
+	public void done() {
+		// TODO Auto-generated method stub
+		model.fireTableDataChanged();
+	}
 }
 
 

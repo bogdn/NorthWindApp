@@ -68,6 +68,8 @@ public class ProductFormView extends JFrame {
 	private List<Supplier> suppliers;
 	private Product product;
 	
+	private PerformActionHandler handler;
+	
 	public ProductFormView(String operationType)
 	{
 		this(operationType, null);
@@ -241,8 +243,19 @@ public class ProductFormView extends JFrame {
 		{
 			productsDAO.addProduct(product);
 		}
-		else if (operationType.equalsIgnoreCase("edit")) {
-			productsDAO.editProduct(product);
+		
+		if(handler != null)
+		{
+			handler.done();
 		}
+		
+		setVisible(false);
+	    dispose();
 	}
+
+	public void setHandler(PerformActionHandler handler) {
+		this.handler = handler;
+	}
+	
+	
 }
