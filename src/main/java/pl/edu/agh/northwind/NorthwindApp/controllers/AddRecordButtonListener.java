@@ -13,12 +13,11 @@ public class AddRecordButtonListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JButton source = (JButton) arg0.getSource();
-		
+		System.out.println("test");
 		if (source.getText().contains("employees")) {
-			new EmployeeFormView("add");
+			new EmployeeFormView("add", null);
 			System.out.println("adddddd");
-		}
-
+		} 
 	}
 
 }
