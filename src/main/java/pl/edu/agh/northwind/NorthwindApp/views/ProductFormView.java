@@ -255,6 +255,10 @@ public class ProductFormView extends JFrame {
 		{
 			productsDAO.addProduct(product);
 		}
+		else if(operationType.equalsIgnoreCase("edit"))
+		{
+			productsDAO.updateProduct(product);
+		}
 		
 		if(handler != null)
 		{

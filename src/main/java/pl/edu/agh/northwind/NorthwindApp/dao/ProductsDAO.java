@@ -40,4 +40,11 @@ public class ProductsDAO {
 		entityManager.persist(product);
 		entityManager.getTransaction().commit();
 	}
+	
+	public void updateProduct(Product product) {
+		EntityManager entityManager = HibernateUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.merge(product);
+		entityManager.getTransaction().commit();
+	}
 }
