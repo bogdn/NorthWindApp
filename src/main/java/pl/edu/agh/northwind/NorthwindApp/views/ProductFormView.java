@@ -4,6 +4,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.NumberFormat;
+import java.util.Formatter;
 import java.util.List;
 
 import javax.swing.ComboBoxModel;
@@ -11,12 +16,15 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.ListDataListener;
+import javax.swing.text.DefaultFormatter;
+import javax.swing.text.InternationalFormatter;
 
 import pl.edu.agh.northwind.NorthwindApp.dao.CategoryDAO;
 import pl.edu.agh.northwind.NorthwindApp.dao.EmployeeDAO;
@@ -117,7 +125,8 @@ public class ProductFormView extends JFrame {
 		JPanel unitPricePanel = new JPanel();
 		unitPricePanel.setLayout(new GridLayout(1, 2));
 		unitPriceLabel = new JLabel("Unit price:");
-		unitPriceTextField = new JTextField();
+		unitPriceTextField = new JFormattedTextField(createFloatFormatter());
+		unitPriceTextField.setText("0");
 		unitPricePanel.add(unitPriceLabel);
 		unitPricePanel.add(unitPriceTextField);
 		add(unitPricePanel);
@@ -125,15 +134,17 @@ public class ProductFormView extends JFrame {
 		JPanel unitsInStockLPanel = new JPanel();
 		unitsInStockLPanel.setLayout(new GridLayout(1, 2));
 		unitsInStockLabel = new JLabel("Units in stock:");
-		unitsInStockTextField = new JTextField();
+		unitsInStockTextField = new JFormattedTextField(createShortFormatter());
+		unitsInStockTextField.setText("0");
 		unitsInStockLPanel.add(unitsInStockLabel);
 		unitsInStockLPanel.add(unitsInStockTextField);
 		add(unitsInStockLPanel);
 		
 		JPanel unitsOnOrderPanel = new JPanel();
 		unitsOnOrderPanel.setLayout(new GridLayout(1, 2));
-		unitsOnOrderLabel = new JLabel("First Name:");
-		unitsOnOrderTextField = new JTextField();
+		unitsOnOrderLabel = new JLabel("Units on order:");
+		unitsOnOrderTextField = new JFormattedTextField(createShortFormatter());
+		unitsOnOrderTextField.setText("0");
 		unitsOnOrderPanel.add(unitsOnOrderLabel);
 		unitsOnOrderPanel.add(unitsOnOrderTextField);
 		add(unitsOnOrderPanel);
@@ -141,7 +152,8 @@ public class ProductFormView extends JFrame {
 		JPanel reorderPanel = new JPanel();
 		reorderPanel.setLayout(new GridLayout(1, 2));
 		reordelLevelLabel = new JLabel("Reorder level:");
-		reordelLevelTextField = new JTextField();
+		reordelLevelTextField = new JFormattedTextField(createShortFormatter());
+		reordelLevelTextField.setText("0");
 		reorderPanel.add(reordelLevelLabel);
 		reorderPanel.add(reordelLevelTextField);
 		add(reorderPanel);
@@ -233,7 +245,7 @@ public class ProductFormView extends JFrame {
 		product.setSupplier(suppliers.get(suplierComboBox.getSelectedIndex()));
 		product.setCategory(categories.get(categoryComboBox.getSelectedIndex()));
 		product.setQuantityPerUnit(quantityPerUnitTextField.getText());
-		product.setUnitPrice(Float.parseFloat(unitPriceTextField.getText()));
+		product.setUnitPrice(Float.parseFloat(unitPriceTextField.getText().replace(",",".")));
 		product.setUnitsInStock(Short.parseShort(unitsInStockTextField.getText()));
 		product.setUnitsOnOrder(Short.parseShort(unitsOnOrderTextField.getText()));
 		product.setReorderLevel(Short.parseShort(reordelLevelTextField.getText()));
@@ -257,5 +269,25 @@ public class ProductFormView extends JFrame {
 		this.handler = handler;
 	}
 	
+	private DefaultFormatter createFloatFormatter()
+	{
+		NumberFormat format = DecimalFormat.getInstance();
+        format.setMinimumFractionDigits(2);
+        format.setMaximumFractionDigits(2);
+        format.setRoundingMode(RoundingMode.HALF_UP);
+        InternationalFormatter formatter = new InternationalFormatter(format);
+        formatter.setAllowsInvalid(false);
+        formatter.setMinimum(0.0);
+        return formatter;
+	}
 	
+	private DefaultFormatter createShortFormatter()
+	{
+		NumberFormat format = DecimalFormat.getInstance();
+        format.setMaximumFractionDigits(0);
+        InternationalFormatter formatter = new InternationalFormatter(format);
+        formatter.setAllowsInvalid(false);
+        formatter.setMinimum(0);
+        return formatter;
+	}
 }

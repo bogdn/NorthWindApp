@@ -142,5 +142,4 @@ public class Product implements java.io.Serializable {
 	public void setDiscontinued(Boolean discontinued) {
 		this.discontinued = discontinued;
 	}
-
 }

@@ -23,7 +23,6 @@ public class ProductsDAO {
 		List<Product> products = new ArrayList<>();
 		;
 		products = query.getResultList();
-
 		return products;
 	}
 	
