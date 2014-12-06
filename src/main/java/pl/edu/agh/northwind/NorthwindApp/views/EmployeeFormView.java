@@ -24,6 +24,14 @@ public class EmployeeFormView extends JFrame {
 	private JButton addEmployeeButton;
 	private Employee employee;
 	private JButton editEmployeeButton;
+	private JLabel titleLabel;
+	private JTextField titleTF;
+	private JLabel titleOfCoutesyLabel;
+	private JTextField titleOfCoutesyTF;
+	private JLabel birthDateLabel;
+	private JTextField birthDateTF;
+	private JLabel addressLabel;
+	private JTextField addressTF;
 	private static EntityManager em = HibernateUtil.getEntityManager();
 
 	public EmployeeFormView(String operationType, final Employee employee) {
@@ -46,12 +54,34 @@ public class EmployeeFormView extends JFrame {
 		lastNameTF.setBounds(120, 40, 100, 20);
 		add(lastNameLabel);
 		add(lastNameTF);
+		
+		titleLabel = new JLabel("Title:");
+		titleTF = new JTextField("");
+		titleLabel.setBounds(30, 70, 100, 20);
+		titleTF.setBounds(120, 70, 100, 20);
+		add(titleLabel);
+		add(titleTF);
+		
+		titleOfCoutesyLabel = new JLabel("Courtesy:");
+		titleOfCoutesyTF = new JTextField("");
+		titleOfCoutesyLabel.setBounds(30, 110, 100, 20);
+		titleOfCoutesyTF.setBounds(120, 110, 100, 20);
+		add(titleOfCoutesyLabel);
+		add(titleOfCoutesyTF);
+		
+		addressLabel = new JLabel("Address:");
+		addressTF = new JTextField("");
+		addressLabel.setBounds(30, 140, 100, 20);
+		addressTF.setBounds(120, 140, 100, 20);
+		add(addressLabel);
+		add(addressTF);
+		
 
 		switch (operationType) {
 
 		case "add":
 			addEmployeeButton = new JButton("Add employee");
-			addEmployeeButton.setBounds(90, 100, 150, 20);
+			addEmployeeButton.setBounds(90, 350, 150, 20);
 			add(addEmployeeButton);
 			addEmployeeButton.addActionListener(new ActionListener() {
 
@@ -60,6 +90,9 @@ public class EmployeeFormView extends JFrame {
 					Employee employee = new Employee();
 					employee.setFirstName(firstNameTF.getText());
 					employee.setLastName(lastNameTF.getText());
+					employee.setTitle(titleTF.getText());
+					employee.setTitleOfCourtesy(titleOfCoutesyTF.getText());
+					employee.setAddress(addressTF.getText());
 					EmployeeDAO.createEmployee(employee);
 
 					JOptionPane.showMessageDialog(EmployeeFormView.this,
@@ -75,9 +108,11 @@ public class EmployeeFormView extends JFrame {
 			firstNameTF.setText((employee.getFirstName()));
 
 			lastNameTF.setText(employee.getLastName());
+			titleTF.setText(employee.getTitle());
+			titleOfCoutesyTF.setText(employee.getTitleOfCourtesy());
 
 			editEmployeeButton = new JButton("Edit employee");
-			editEmployeeButton.setBounds(90, 100, 150, 20);
+			editEmployeeButton.setBounds(90, 350, 150, 20);
 			add(editEmployeeButton);
 			editEmployeeButton.addActionListener(new ActionListener() {
 
@@ -86,11 +121,15 @@ public class EmployeeFormView extends JFrame {
 					em.getTransaction().begin();
 					employee.setFirstName(firstNameTF.getText());
 					employee.setLastName(lastNameTF.getText());
+					employee.setTitle(titleTF.getText());
+					employee.setTitleOfCourtesy(titleOfCoutesyTF.getText());
+					employee.setAddress(addressTF.getText());
 					em.getTransaction().commit();
 					
 
 					JOptionPane.showMessageDialog(EmployeeFormView.this,
 							"Updated Employee", "Done !", 1);
+					
 					EmployeeFormView.this.dispose();
 
 				}

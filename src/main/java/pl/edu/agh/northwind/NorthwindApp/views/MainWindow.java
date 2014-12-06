@@ -21,6 +21,7 @@ import javax.swing.SwingUtilities;
 
 import pl.edu.agh.northwind.NorthwindApp.controllers.MainController;
 import pl.edu.agh.northwind.NorthwindApp.controllers.ProductButtonListener;
+import pl.edu.agh.northwind.NorthwindApp.dao.HibernateUtil;
 import pl.edu.agh.northwind.NorthwindApp.entities.Customer;
 import pl.edu.agh.northwind.NorthwindApp.entities.Employee;
 
@@ -125,6 +126,7 @@ public class MainWindow extends JFrame {
 				mainWindow.setVisible(true);
 				
 				new MainController(mainWindow);
+				HibernateUtil.getEntityManager();
 				
 				
 			}

@@ -112,5 +112,9 @@ public class ListAllTable extends JFrame {
 
 		pack();
 	}
+	
+	public void refreshTable() {
+		table.setModel(new EmployeeTableModel());
+	}
 
 }

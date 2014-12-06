@@ -18,10 +18,6 @@ public class EmployeeDAO {
 			.getName());
 
 	public static void createEmployee(Employee employee) {
-		EntityManagerFactory entityManagerFactory = Persistence
-				.createEntityManagerFactory("northwind");
-		EntityManager entityManager = entityManagerFactory
-				.createEntityManager();
 		entityManager.getTransaction().begin();
 
 		entityManager.persist(employee);
@@ -48,10 +44,6 @@ public class EmployeeDAO {
 	}
 
 	public static List<Employee> findAll() {
-		EntityManagerFactory entityManagerFactory = Persistence
-				.createEntityManagerFactory("northwind");
-		EntityManager entityManager = entityManagerFactory
-				.createEntityManager();
 		entityManager.getTransaction().begin();
 
 		List<Employee> employees = new ArrayList<>();
