@@ -13,6 +13,8 @@ import javax.persistence.Query;
 import pl.edu.agh.northwind.NorthwindApp.entities.Category;
 import pl.edu.agh.northwind.NorthwindApp.entities.Customer;
 import pl.edu.agh.northwind.NorthwindApp.entities.Product;
+import pl.edu.agh.northwind.NorthwindApp.performance.PerformanceManager;
+import pl.edu.agh.northwind.NorthwindApp.performance.PerformanceTestHelper;
 
 public class CategoryDAO {
 	private static final Logger logger = Logger.getLogger(CategoryDAO.class
@@ -22,8 +24,11 @@ public class CategoryDAO {
 		EntityManager entityManager = HibernateUtil.getEntityManager();
 		Query query = entityManager.createQuery("from Category");
 		List<Category> categories = new ArrayList<>();
-		;
+
+		PerformanceTestHelper test = PerformanceManager.getTestHelper("select all categories");
+		test.start();
 		categories = query.getResultList();
+		test.stopAndSave();
 
 		return categories;
 	}

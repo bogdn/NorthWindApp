@@ -86,7 +86,7 @@ public class ProductFormView extends JFrame {
 	public ProductFormView(String operationType, Product product) {
 		super("Adding record to product table");
 		this.operationType = operationType;
-		setPreferredSize(new Dimension(400, 700));
+		setPreferredSize(new Dimension(400, 400));
 		setVisible(true);
 		setLayout(new GridLayout(20, 1));
 		
@@ -227,7 +227,7 @@ public class ProductFormView extends JFrame {
 			setSuplier(product.getSupplier());
 			setCategory(product.getCategory());
 			quantityPerUnitTextField.setText(product.getQuantityPerUnit());
-			unitPriceTextField.setText(String.valueOf(product.getUnitPrice()));
+			unitPriceTextField.setText(String.valueOf(product.getUnitPrice()).replace(".", ","));
 			unitsInStockTextField.setText(String.valueOf(product.getUnitsInStock()));
 			unitsOnOrderTextField.setText(String.valueOf(product.getUnitsOnOrder()));
 			reordelLevelTextField.setText(String.valueOf(product.getReorderLevel()));

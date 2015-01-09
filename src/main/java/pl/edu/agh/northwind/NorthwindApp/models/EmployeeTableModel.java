@@ -23,7 +23,7 @@ public class EmployeeTableModel extends AbstractTableModel implements
 		columnNames = getColumnNamesFromDatabase();
 		data = getRows();
 	}
-
+	
 	// Implementing ListAllInterface methods
 	public Field[] getColumnNamesFromDatabase() {
 		return Employee.class.getDeclaredFields();

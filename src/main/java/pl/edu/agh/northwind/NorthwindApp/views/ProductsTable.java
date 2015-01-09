@@ -58,7 +58,7 @@ public class ProductsTable extends JFrame implements PerformActionHandler{
 
 	public ProductsTable() {
 		setVisible(true);
-		setPreferredSize(new Dimension(900, 600));
+		setPreferredSize(new Dimension(1150, 600));
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); //fullScreen
 
 		table = new JTable();
@@ -152,7 +152,7 @@ public class ProductsTable extends JFrame implements PerformActionHandler{
 	public class ProductsTableModel extends AbstractTableModel {
 
 		public ProductsTableModel() {
-			System.out.println(objects);
+			
 		}
 
 		// Implementing AbstractTableModel methods

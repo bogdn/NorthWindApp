@@ -12,6 +12,8 @@ import javax.persistence.Query;
 
 import pl.edu.agh.northwind.NorthwindApp.entities.Customer;
 import pl.edu.agh.northwind.NorthwindApp.entities.Product;
+import pl.edu.agh.northwind.NorthwindApp.performance.PerformanceManager;
+import pl.edu.agh.northwind.NorthwindApp.performance.PerformanceTestHelper;
 
 public class ProductsDAO {
 	private static final Logger logger = Logger.getLogger(ProductsDAO.class
@@ -20,9 +22,11 @@ public class ProductsDAO {
 	public List<Product> findAll() {
 		EntityManager entityManager = HibernateUtil.getEntityManager();
 		Query query = entityManager.createQuery("from Product");
+		PerformanceTestHelper test = PerformanceManager.getTestHelper("Select all products");
 		List<Product> products = new ArrayList<>();
-		;
+		test.start();
 		products = query.getResultList();
+		test.stopAndSave();
 		return products;
 	}
 	
@@ -30,14 +34,20 @@ public class ProductsDAO {
 	{
 		EntityManager entityManager = HibernateUtil.getEntityManager();
 		entityManager.getTransaction().begin();
+		PerformanceTestHelper test = PerformanceManager.getTestHelper("Delete product");
+		test.start();
 		entityManager.remove(product);
+		test.stopAndSave();
 		entityManager.getTransaction().commit();
 	}
 
 	public void addProduct(Product product) {
 		EntityManager entityManager = HibernateUtil.getEntityManager();
 		entityManager.getTransaction().begin();
+		PerformanceTestHelper test = PerformanceManager.getTestHelper("Add product");
+		test.start();
 		entityManager.persist(product);
+		test.stopAndSave();
 		entityManager.getTransaction().commit();
 	}
 	

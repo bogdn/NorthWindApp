@@ -98,7 +98,7 @@ public class Product implements java.io.Serializable {
 		this.quantityPerUnit = quantityPerUnit;
 	}
 
-	@Column(name = "UnitPrice", precision = 1, scale = 0)
+	@Column(name = "UnitPrice", precision = 3, scale = 0)
 	public Float getUnitPrice() {
 		return this.unitPrice;
 	}
