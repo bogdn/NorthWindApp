@@ -1,5 +1,6 @@
 package pl.edu.agh.northwind.NorthwindApp.performance;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PerformanceManager {
@@ -27,7 +28,6 @@ public class PerformanceManager {
 		
 		PerformanceTest performanceTest = new PerformanceTest(name);
 		
-		
 		tests.put(name, performanceTest);
 		
 		return performanceTest;
@@ -36,5 +36,16 @@ public class PerformanceManager {
 	public static PerformanceTestHelper getTestHelper(String name)
 	{
 		return new PerformanceTestHelper(name);
+	}
+
+	public ArrayList<PerformanceTest> getAllTests() {
+		// TODO Auto-generated method stub
+		ArrayList<PerformanceTest> testsArr = new ArrayList<>();
+		System.out.println(tests);
+		for (String name : tests.keySet()) {
+			testsArr.add(tests.get(name));
+		}
+		
+		return testsArr;
 	}
 }

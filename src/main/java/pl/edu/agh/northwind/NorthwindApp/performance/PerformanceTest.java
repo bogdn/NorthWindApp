@@ -18,8 +18,25 @@ public class PerformanceTest {
 		count++;
 		
 		if(time > slowest) slowest = time;
-		if(time < fastest) fastest = time;
+		if(time < fastest || fastest == 0) fastest = time;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public long getCount() {
+		return count;
+	}
+
+	public long getFastest() {
+		return fastest;
+	}
+
+	public long getSlowest() {
+		return slowest;
+	}
+	
 	
 	
 }

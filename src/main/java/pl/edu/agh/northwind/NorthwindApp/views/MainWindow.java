@@ -39,6 +39,7 @@ public class MainWindow extends JFrame {
 	private JButton customerButton;
 	private JButton productsButton;
 	private JButton homeButton;
+	private JButton performanceResultButton;
 	
 	public MainWindow() {
 		super("NorthwindApp");
@@ -53,6 +54,9 @@ public class MainWindow extends JFrame {
 		
 		crudButton = new JButton("CRUD operations");
 		centerPanel.add(crudButton);
+		
+		performanceResultButton = new JButton("Performance results");
+		centerPanel.add(performanceResultButton);
 		
 		ImageIcon imageIcon = new ImageIcon(IMG_PATH);
 		aghIcon = new JLabel(imageIcon);
@@ -100,6 +104,10 @@ public class MainWindow extends JFrame {
 	
 	public void addProductsButtonListener(ActionListener al) {
 		productsButton.addActionListener(al);
+	}
+	
+	public void addPerfResultButtonListener(ActionListener al) {
+		performanceResultButton.addActionListener(al);
 	}
 	
 	public void setCrudButtonVisible(boolean visible) {

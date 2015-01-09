@@ -33,28 +33,31 @@ public class ProductsDAO {
 	public void deleteProduct(Product product)
 	{
 		EntityManager entityManager = HibernateUtil.getEntityManager();
-		entityManager.getTransaction().begin();
 		PerformanceTestHelper test = PerformanceManager.getTestHelper("Delete product");
+		entityManager.getTransaction().begin();
 		test.start();
 		entityManager.remove(product);
-		test.stopAndSave();
 		entityManager.getTransaction().commit();
+		test.stopAndSave();
 	}
 
 	public void addProduct(Product product) {
 		EntityManager entityManager = HibernateUtil.getEntityManager();
-		entityManager.getTransaction().begin();
 		PerformanceTestHelper test = PerformanceManager.getTestHelper("Add product");
 		test.start();
+		entityManager.getTransaction().begin();
 		entityManager.persist(product);
-		test.stopAndSave();
 		entityManager.getTransaction().commit();
+		test.stopAndSave();
 	}
 	
 	public void updateProduct(Product product) {
 		EntityManager entityManager = HibernateUtil.getEntityManager();
+		PerformanceTestHelper test = PerformanceManager.getTestHelper("Add product");
+		test.start();
 		entityManager.getTransaction().begin();
 		entityManager.merge(product);
 		entityManager.getTransaction().commit();
+		test.stopAndSave();
 	}
 }
