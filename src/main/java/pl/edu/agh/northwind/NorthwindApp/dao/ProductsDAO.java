@@ -60,4 +60,32 @@ public class ProductsDAO {
 		entityManager.getTransaction().commit();
 		test.stopAndSave();
 	}
+	
+	public synchronized List<Product> getProductsInPriceRange(float from,
+			float to)
+	{
+		EntityManager entityManager = HibernateUtil.getEntityManager();
+		Query query = entityManager.createQuery("from Product where unitPrice >= '" + from + "' and unitPrice <= '" + to + "'");
+		PerformanceTestHelper test = PerformanceManager.getTestHelper("Select products in range");
+		List<Product> products = new ArrayList<>();
+		test.start();
+		products = query.getResultList();
+		test.stopAndSave();
+		
+		return products;
+	}
+	
+	public synchronized List<Product> getProductsUnitInStock(float from,
+			float to)
+	{
+		EntityManager entityManager = HibernateUtil.getEntityManager();
+		Query query = entityManager.createQuery("from Product where unitsInStock >= '" + from + "' and unitsInStock <= '" + to + "'");
+		PerformanceTestHelper test = PerformanceManager.getTestHelper("Select products in range");
+		List<Product> products = new ArrayList<>();
+		test.start();
+		products = query.getResultList();
+		test.stopAndSave();
+		
+		return products;
+	}
 }

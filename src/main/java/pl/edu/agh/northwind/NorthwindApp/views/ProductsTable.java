@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.LayoutManager;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
@@ -26,8 +28,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -55,6 +59,9 @@ public class ProductsTable extends JFrame implements PerformActionHandler{
 	ProductsDAO productsDAO = new ProductsDAO();
 	private List<String> columnNames;
 	private List<Product> objects;
+	
+	private JTextField fromTF;
+	private JTextField toTF;
 
 	public ProductsTable() {
 		setVisible(true);
@@ -107,7 +114,33 @@ public class ProductsTable extends JFrame implements PerformActionHandler{
 		table.getColumnModel().getColumn(1).setPreferredWidth(150);
 		table.getColumnModel().getColumn(2).setPreferredWidth(150);
 		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		
+		JPanel panelTop = new JPanel();
+		
+		JLabel label = new JLabel("Unit in stock:");
+		
+		panelTop.add(label);
+		
+		fromTF = new JTextField();
+		fromTF.setPreferredSize(new Dimension(100, 30));
+		panelTop.add(fromTF);
+		toTF = new JTextField();
+		toTF.setPreferredSize(new Dimension(100, 30));
+		panelTop.add(toTF);
+		JButton button = new JButton("Reload");
+		panelTop.add(button);
+		
+		add(panelTop, BorderLayout.NORTH);
 
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				reloadData();
+			}
+		});
+		
 		pack();
 		
 		reloadData();
@@ -146,7 +179,30 @@ public class ProductsTable extends JFrame implements PerformActionHandler{
 	}
 	
 	public List<Product> getObjects() {
-		return productsDAO.findAll();
+		if(fromTF.getText().length() != 0 || toTF.getText().length() != 0)
+		{
+			int from;
+			
+			try {
+				from = Integer.parseInt(fromTF.getText());
+			} catch (Exception e) {
+				from = 0;
+			}
+			
+			int to;
+			
+			try {
+				to = Integer.parseInt(toTF.getText());
+			} catch (Exception e) {
+				// TODO: handle exception
+				to = Integer.MAX_VALUE;
+			}
+			
+			return productsDAO.getProductsUnitInStock(from, to);
+		}
+		else {
+			return productsDAO.findAll();
+		}
 	}
 	
 	public class ProductsTableModel extends AbstractTableModel {
