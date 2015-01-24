@@ -12,6 +12,7 @@ public class ListAllButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("List all");
+		System.out.println(((JButton) e.getSource()).getText());
 		JButton source = (JButton) e.getSource();
 
 		if (source.getText().contains("employees")) {

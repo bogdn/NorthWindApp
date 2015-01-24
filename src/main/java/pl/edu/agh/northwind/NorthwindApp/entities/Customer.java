@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "customers")
 public class Customer implements java.io.Serializable {
 
-	private String customerId;
+	private Integer customerId;
 	private String companyName;
 	private String contactName;
 	private String contactTitle;
@@ -29,14 +29,10 @@ public class Customer implements java.io.Serializable {
 	public Customer() {
 	}
 
-	public Customer(String customerId) {
-		this.customerId = customerId;
-	}
-
-	public Customer(String customerId, String companyName, String contactName,
+	public Customer(String companyName, String contactName,
 			String contactTitle, String address, String city, String region,
 			String postalCode, String country, String phone, String fax) {
-		this.customerId = customerId;
+		//this.customerId = customerId;
 		this.companyName = companyName;
 		this.contactName = contactName;
 		this.contactTitle = contactTitle;
@@ -50,12 +46,12 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@Id
-	@Column(name = "CustomerID", unique = true, nullable = false, length = 5)
-	public String getCustomerId() {
+	@Column(name = "CustomerID", unique = true, nullable = false)
+	public Integer getCustomerId() {
 		return this.customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
 

@@ -30,7 +30,6 @@ public class EmployeeTableModel extends AbstractTableModel implements
 	}
 
 	public Object[][] getRows() {
-		
 		List<Employee> employees = EmployeeDAO.findAll();
 		
         Object[][] rows = new Object[employees.size()][getColumnCount()];
